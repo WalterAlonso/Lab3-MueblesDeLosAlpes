@@ -1,0 +1,47 @@
+target/*
+!.mvn/wrapper/maven-wrapper.jar
+!target/SCB-Back-1.war
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+#Lab2-MueblesDeLosAlpes-ejb
+#Lab2-MueblesDeLosAlpes-war
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+Lab2-MueblesDeLosAlpes-ejb/build
+Lab2-MueblesDeLosAlpes-ejb/build/
+Lab2-MueblesDeLosAlpes-ejb/build/*
+Lab2-MueblesDeLosAlpes-ejb/dist
+Lab2-MueblesDeLosAlpes-ejb/dist/
+Lab2-MueblesDeLosAlpes-ejb/dist/*
+Lab2-MueblesDeLosAlpes-war/build/
+Lab2-MueblesDeLosAlpes-war/dist/
+
+
+release.properties
+application-dev.properties
+/application-dev.properties
+src/main/resources/application.properties
+.aws/credentials
+src/main/resources/application-dev.properties
+
+.aws
+.aws/credentials
+.aws/
