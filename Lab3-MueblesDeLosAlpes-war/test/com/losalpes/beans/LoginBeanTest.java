@@ -84,7 +84,7 @@ public class LoginBeanTest
         LoginBean instance = new LoginBean();
         instance.setUsuario("client");
         instance.setContraseña("clientclient");
-        String expResult = "cliente";
+        String expResult = "catalogoCliente";
         String result = instance.ingresar();
         assertEquals(expResult, result);
     }
