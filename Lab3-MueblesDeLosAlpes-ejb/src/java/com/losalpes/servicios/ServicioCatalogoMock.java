@@ -6,6 +6,9 @@
 package com.losalpes.servicios;
 
 import com.losalpes.entities.Mueble;
+import com.losalpes.entities.Usuario;
+import com.losalpes.excepciones.OperacionInvalidaException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -17,6 +20,27 @@ import javax.ejb.Stateless;
 @Stateless
 public class ServicioCatalogoMock implements IServicioCatalogoMockLocal, IServicioCatalogoMockRemote{
     
+    //-----------------------------------------------------------
+    // Atributos
+    //-----------------------------------------------------------
+    
+    /**
+     * Interface con referencia al servicio de persistencia en el sistema
+     */
+    @EJB
+    private IServicioPersistenciaMockLocal persistencia;
+
+    //-----------------------------------------------------------
+    // Constructor
+    //-----------------------------------------------------------
+
+    /**
+     * Constructor de la clase sin argumentos
+     */
+     public ServicioCatalogoMock()
+     {
+     }
+    
     /**
      * Interface con referencia al servicio de persistencia en el sistema
      */
@@ -24,25 +48,36 @@ public class ServicioCatalogoMock implements IServicioCatalogoMockLocal, IServic
     private IServicioCatalogoMockLocal catalogo;
     
     @Override
-    public void agregarMueble(Mueble mueble) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void agregarMueble(Mueble mueble) throws OperacionInvalidaException {
+        try {
+            persistencia.create(mueble);                  
+        }
+        catch(Exception ex)
+        {
+            throw new OperacionInvalidaException(ex.getMessage());
+        }
     }
-
+    
     @Override
-    public void eliminarMueble(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void eliminarMueble(long id) throws OperacionInvalidaException {
+       try
+        {
+        Mueble mueble=(Mueble) persistencia.findById(Mueble.class, id);
+        persistencia.delete(mueble);
+        }
+        catch(OperacionInvalidaException e)
+        {
+            throw new OperacionInvalidaException("Ocurrió un error al momento de eliminar");
+        }
     }
 
     @Override
     public List<Mueble> darMuebles() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return(ArrayList<Mueble>) persistencia.findAll(Mueble.class);
     }
 
     @Override
     public void removerEjemplarMueble(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //TODO: que es remover ejemplar??
     }
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 }

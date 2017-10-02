@@ -40,6 +40,11 @@ public class CatalogoBean implements Serializable
      */
     private Mueble mueble;
 
+     /**
+     * Mensaje utilizado para mostrar información importante al usuario.
+     */
+    private String mensaje;
+    
     /**
      * Relación con la interfaz que provee los servicios necesarios del catálogo.
      */
@@ -89,6 +94,15 @@ public class CatalogoBean implements Serializable
 
         return catalogo.darMuebles();
     }
+    
+    /**
+     * Devuelve el mensaje que contiene información sobre algún tipo de estado
+     * @return mensaje Mensaje a devolver
+     */
+    public String getMensaje()
+    {
+        return mensaje;
+    }
 
     //-----------------------------------------------------------
     // Métodos
@@ -99,8 +113,14 @@ public class CatalogoBean implements Serializable
      */
     public void agregarMueble()
     {
+        mensaje = ""; 
+        try {
         catalogo.agregarMueble(mueble);
         mueble=new Mueble();
+        }
+        catch(Exception e){
+            mensaje = "Ocurrió un error al momento de crear el mueble.";
+        }
     }
 
     /**
@@ -109,11 +129,17 @@ public class CatalogoBean implements Serializable
      */
     public void eliminarMueble(ActionEvent evento)
     {
+        mensaje = "";
+        try {
         FacesContext context = FacesContext.getCurrentInstance();
         Map map = context.getExternalContext().getRequestParameterMap();
         long inventoryId = Long.parseLong((String) map.get("muebleId"));
 
         catalogo.eliminarMueble(inventoryId);
+        }
+        catch(Exception e){
+            mensaje = "Ocurrió un error al momento de eliminar el mueble.";
+        }
     }
     
     /**
@@ -137,6 +163,7 @@ public class CatalogoBean implements Serializable
      */
     public void limpiar()
     {
+        mensaje = "";
         mueble=new Mueble();
     }
 }
