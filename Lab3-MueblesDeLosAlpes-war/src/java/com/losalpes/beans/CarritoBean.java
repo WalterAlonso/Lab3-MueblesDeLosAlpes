@@ -16,11 +16,11 @@ import com.losalpes.entities.Mueble;
 import com.losalpes.entities.Usuario;
 import com.losalpes.servicios.IServicioCarritoMockLocal;
 import com.losalpes.servicios.IServicioCatalogoMockLocal;
-import com.losalpes.servicios.ServicioCarritoMock;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.primefaces.event.DragDropEvent;
@@ -39,11 +39,13 @@ public class CarritoBean implements Serializable
     /**
      * Relación con la interfaz que provee los servicios necesarios del carrito de compras
      */
+    @EJB
     private IServicioCarritoMockLocal carrito;
 
     /**
      * Relación con la interfaz que provee los servicios necesarios del catálogo.
      */
+    @EJB
     private IServicioCatalogoMockLocal catalogo;
     
     //-----------------------------------------------------------
@@ -54,10 +56,7 @@ public class CarritoBean implements Serializable
      * Constructor sin argumentos de la clase
      */
     public CarritoBean()
-    {
-        //Incializa los servicios
-        carrito=new ServicioCarritoMock();
-        
+    {        
     }
 
     //-----------------------------------------------------------

@@ -14,11 +14,14 @@ package com.losalpes.servicios;
 
 import com.losalpes.entities.Usuario;
 import com.losalpes.excepciones.AutenticacionException;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 /**
  * Clase que se encarga de la autenticación de un usuario en el sistema
  * 
  */
+@Stateless
 public class ServicioSeguridadMock implements IServicioSeguridadMockLocal
 {
 
@@ -29,6 +32,7 @@ public class ServicioSeguridadMock implements IServicioSeguridadMockLocal
     /**
      * Interface con referencia al servicio de persistencia en el sistema
      */
+    @EJB
     private IServicioPersistenciaMockLocal persistencia;
 
     //-----------------------------------------------------------
@@ -40,7 +44,6 @@ public class ServicioSeguridadMock implements IServicioSeguridadMockLocal
      */
     public ServicioSeguridadMock()
     {
-        persistencia=new ServicioPersistenciaMock();
     }
 
     //-----------------------------------------------------------

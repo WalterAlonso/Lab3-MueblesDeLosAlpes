@@ -24,13 +24,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import javax.ejb.Stateless;
+import javax.ejb.Singleton;
 
 /**
  * Implementación de los servicios de persistencia
  * 
  */
-@Stateless
+@Singleton
 public class ServicioPersistenciaMock implements IServicioPersistenciaMockRemote, IServicioPersistenciaMockLocal {
 
     //-----------------------------------------------------------

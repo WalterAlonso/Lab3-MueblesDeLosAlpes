@@ -16,11 +16,14 @@ import com.losalpes.entities.Usuario;
 import com.losalpes.excepciones.OperacionInvalidaException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 /**
  * Implementación de los servicios de registro de un cliente en el sistema
  * 
  */
+@Stateless
 public class ServicioRegistroMock implements IServicioRegistroMockRemote, IServicioRegistroMockLocal
 {
     //-----------------------------------------------------------
@@ -30,6 +33,7 @@ public class ServicioRegistroMock implements IServicioRegistroMockRemote, IServi
     /**
      * Interface con referencia al servicio de persistencia en el sistema
      */
+    @EJB
     private IServicioPersistenciaMockLocal persistencia;
 
     //-----------------------------------------------------------
@@ -41,7 +45,6 @@ public class ServicioRegistroMock implements IServicioRegistroMockRemote, IServi
      */
      public ServicioRegistroMock()
      {
-        persistencia=new ServicioPersistenciaMock();
      }
 
     //-----------------------------------------------------------
