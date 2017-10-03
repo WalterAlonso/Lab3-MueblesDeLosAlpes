@@ -53,7 +53,6 @@ public class ServicioCatalogoMock implements IServicioCatalogoMockLocal, IServic
     @Override
     public void agregarMueble(Mueble mueble) throws OperacionInvalidaException {
         try {
-           this.esValidoCrearMueble(mueble);
            persistencia.create(mueble);                  
         }
         catch(Exception ex)
@@ -61,28 +60,7 @@ public class ServicioCatalogoMock implements IServicioCatalogoMockLocal, IServic
             throw new OperacionInvalidaException(ex.getMessage());
         }
     }
-    
-    /**
-     * Valida si el mueble es valido para ser creado
-     * @param mueble El mueble a ser validado.
-     * @throws OperacionInvalidaException para operaciones invalidas.
-     */
-    private void esValidoCrearMueble(Mueble mueble) throws OperacionInvalidaException {
-        if(mueble.getReferencia() <= 0){
-            throw new OperacionInvalidaException("Nùmero de referencia invalido, debe ser mayor a 0.");
-        }
-        if(mueble.getCantidad()  <= 0){
-            throw new OperacionInvalidaException("la cantidad debe ser mayor a 0.");
-        }
-        if(mueble.getPrecio()<= 0){
-            throw new OperacionInvalidaException("El precio debe ser mayor a 0.");
-        }
-        Mueble muebleEncontrado=(Mueble) persistencia.findById(Mueble.class, mueble.getReferencia());
-        if(muebleEncontrado != null) {
-            throw new OperacionInvalidaException("El número de referencia ya está asignado");
-        }
-    }
-    
+        
     /**
      * Elimina un mueble del sistema
      * @param id Identificador único del mueble a eliminar
@@ -96,7 +74,7 @@ public class ServicioCatalogoMock implements IServicioCatalogoMockLocal, IServic
         }
         catch(OperacionInvalidaException e)
         {
-            throw new OperacionInvalidaException("Ocurrió un error al momento de eliminar");
+            throw new OperacionInvalidaException("Ocurrió un error al momento de eliminar:"+e.getMessage());
         }
     }
 
