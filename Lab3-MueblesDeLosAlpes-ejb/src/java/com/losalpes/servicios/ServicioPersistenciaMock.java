@@ -24,6 +24,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import javax.ejb.ConcurrencyManagement;
+import static javax.ejb.ConcurrencyManagementType.CONTAINER;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
 import javax.ejb.Singleton;
 
 /**
@@ -31,6 +35,8 @@ import javax.ejb.Singleton;
  * 
  */
 @Singleton
+@ConcurrencyManagement(CONTAINER)
+@Lock(LockType.READ)
 public class ServicioPersistenciaMock implements IServicioPersistenciaMockRemote, IServicioPersistenciaMockLocal {
 
     //-----------------------------------------------------------
@@ -126,6 +132,7 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockRemote
      * @param obj Objeto que representa la instancia de la entidad que se quiere crear.
      */
     @Override
+    @Lock(LockType.WRITE)
     public void create(Object obj) throws OperacionInvalidaException
     {
         if (obj instanceof Vendedor)
@@ -168,6 +175,7 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockRemote
      * @param obj Objeto que representa la instancia de la entidad que se quiere modificar.
      */
     @Override
+    @Lock(LockType.WRITE)
     public void update(Object obj)
     {
         if (obj instanceof Vendedor)
@@ -222,6 +230,7 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockRemote
      * @param obj Objeto que representa la instancia de la entidad que se quiere borrar.
      */
     @Override
+    @Lock(LockType.WRITE)
     public void delete(Object obj) throws OperacionInvalidaException
     {
         if (obj instanceof Vendedor)
@@ -318,7 +327,7 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockRemote
      * @param id Identificador unico del objeto.
      * @return obj Resultado de la consulta.
      */
-    @Override
+    @Override    
     public Object findById(Class c, Object id)
     {
         if (c.equals(Vendedor.class))
