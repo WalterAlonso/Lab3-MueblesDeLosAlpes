@@ -119,7 +119,7 @@ public class CatalogoBean implements Serializable
         mueble=new Mueble();
         }
         catch(Exception e){
-            mensaje = "Ocurrió un error al momento de crear el mueble.";
+            mensaje = "Ocurrió un error al momento de crear el mueble: "+ e.getMessage();
         }
     }
 
@@ -138,7 +138,7 @@ public class CatalogoBean implements Serializable
         catalogo.eliminarMueble(inventoryId);
         }
         catch(Exception e){
-            mensaje = "Ocurrió un error al momento de eliminar el mueble.";
+            mensaje = "Ocurrió un error al momento de eliminar el mueble: "+ e.getMessage();
         }
     }
     
