@@ -42,6 +42,13 @@
         <managed-bean-class>com.losalpes.beans.VendedorBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    
+    <managed-bean>
+        <description>Managed Bean encargado de los reportes del sistema</description>
+        <managed-bean-name>ventasBean</managed-bean-name>
+        <managed-bean-class>com.losalpes.beans.VentasBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
     <!-- Reglas de navegación -->
     <navigation-rule>

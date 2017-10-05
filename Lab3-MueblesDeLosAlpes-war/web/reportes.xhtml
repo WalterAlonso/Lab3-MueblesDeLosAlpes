@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!--
+    Document   : catalogo
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/main-template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:param name="titulo" value="Reportes" />
+    <ui:define name="body">
+        <h:form>
+            <div align="right" style="padding-right: 10px">
+                <h:commandButton style="background: transparent" image="./resources/img/pag/atras.png" action="menu.xhtml"/>
+            </div>
+        </h:form>
+        <h:outputText id="linkHeader"
+                      value="Reportes del Sistema" style="color:white"/>
+        <p:fieldset legend="Reportes parciales del Sistema">
+
+            <h:form> 
+                <h:outputLabel value="Año: " styleClass="strong"/>
+                <h:selectOneMenu value = "#{ventasBean.anio}" required="true" requiredMessage="Selecciona "> 
+                    <f:selectItems value="#{ventasBean.anios}" />  
+                </h:selectOneMenu>  
+                <h:commandButton value = "Seleccionar Año" action = "#{ventasBean.anioSeleccionado()}" /> 
+                <h:outputLabel value="Selección: #{ventasBean.anio}" styleClass="strong"/>
+            </h:form>
+            <h:form> 
+                <h:outputLabel value="Mes: " styleClass="strong"/>
+                <h:selectOneMenu value = "#{ventasBean.mes}" required="true" requiredMessage="Selecciona "> 
+                    <f:selectItems value="#{ventasBean.meses}" />  
+                </h:selectOneMenu>  
+                <h:commandButton value = "Seleccionar Mes" action = "#{ventasBean.mesSeleccionado()}" /> 
+                <h:outputLabel value="Selección:  #{ventasBean.mes}" styleClass="strong"/>
+            </h:form>
+            <h:form>
+                <p:dataTable
+                    id="data"
+                    value="#{ventasBean.ventasDias.entrySet().toArray()}"
+                    var="file"
+                    scrollable="false"
+                    scrollHeight="100px"
+                    paginator="true"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    resizableColumns="true"
+                    rows="5">
+                    <p:column headerText="Dia" sortBy="#{file.key}">
+                        <h:outputText value="#{file.key}" />
+                    </p:column>
+                    <p:column headerText="Cantidad" sortBy="#{file.value}">
+                        <h:outputText value="#{file.value}" />
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </p:fieldset>
+        <p:fieldset legend="Reportes totales del Sistema">
+            <h:form>
+                <p:dataTable
+                    id="data"
+                    value="#{ventasBean.ventas}"
+                    var="file"
+                    scrollable="false"
+                    scrollHeight="100px"
+                    paginator="true"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    resizableColumns="true"
+                    rows="5">
+
+
+                    <p:column headerText="Fecha de Venta" sortBy="#{file.fechaVenta}">
+                        <h:outputText value="#{file.fechaVenta}" />
+                    </p:column>
+
+                    <p:column headerText="Producto">
+                        <h:outputText value="#{file.producto.nombre}" />
+                    </p:column>
+
+                    <p:column headerText="Cantidad" sortBy="#{file.cantidad}">
+                        <h:outputText value="#{file.cantidad}" />
+                    </p:column>
+
+                    <p:column headerText="Ciudad">
+                        <h:outputText value="#{file.ciudad}" />
+                    </p:column>
+
+                    <p:column headerText="Comprador">
+                        <h:outputText value="#{file.comprador.nombreCompleto}" />
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </p:fieldset>
+    </ui:define>
+</ui:composition>
