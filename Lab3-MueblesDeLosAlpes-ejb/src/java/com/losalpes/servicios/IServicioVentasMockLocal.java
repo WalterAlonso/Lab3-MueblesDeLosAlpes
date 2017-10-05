@@ -41,14 +41,15 @@ public interface IServicioVentasMockLocal {
     /**
      * Devuelve todas los meses en los que han habido ventas en el sistema de un
      * año
-     *
+     * @param anio, año del cual se quieren obtener los meses
      * @return ventas Ventas del sistema
      */
     public ArrayList<Integer> getMesesAnio(int anio);
 
     /**
      * Devuelve numéro de ventas por dia en un mes
-     *
+     * @param anio, año del cual se quieren obtener los reportes
+     * @param mes, mes del cual se quieren obtener los reportes
      * @return ventas Ventas del sistema
      */
     public HashMap<Integer, Integer> getVentasPorDias(int anio, int mes);

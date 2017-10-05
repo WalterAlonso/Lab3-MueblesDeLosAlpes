@@ -112,13 +112,16 @@ public class ServicioPersistenciaMock implements IServicioPersistenciaMockRemote
 
             registrosVentas = new ArrayList<RegistroVenta>();
             Random r = new Random();
-            for (int e = 0; e < 15; e++) {
+            for (int e = 0; e < 30; e++) {
+                //Genera un valor random para seleccionar el producto
                 int rndProducto = (int) (Math.random() * 8);
+                //Genera un valor random para seleccionar la cantidad 
                 int rndCantidad = (int) (Math.random() * 15) + 1;
 
                 RegistroVenta venta = new RegistroVenta();
                 venta.setCantidad(rndCantidad);
                 venta.setProducto(muebles.get(rndProducto));
+                //Genera un valor random para establecer una fecha
                 long ms = -946771200000L + (Math.abs(r.nextLong()) % (70L * 365 * 2 * 60 * 1000));
                 venta.setFechaVenta(new Date(ms));
                 venta.setCiudad("Bogotá");

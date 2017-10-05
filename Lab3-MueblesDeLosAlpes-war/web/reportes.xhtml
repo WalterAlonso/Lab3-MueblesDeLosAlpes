@@ -16,47 +16,6 @@
                 <h:commandButton style="background: transparent" image="./resources/img/pag/atras.png" action="menu.xhtml"/>
             </div>
         </h:form>
-        <h:outputText id="linkHeader"
-                      value="Reportes del Sistema" style="color:white"/>
-        <p:fieldset legend="Reportes parciales del Sistema">
-
-            <h:form> 
-                <h:outputLabel value="Año: " styleClass="strong"/>
-                <h:selectOneMenu value = "#{ventasBean.anio}" required="true" requiredMessage="Selecciona "> 
-                    <f:selectItems value="#{ventasBean.anios}" />  
-                </h:selectOneMenu>  
-                <h:commandButton value = "Seleccionar Año" action = "#{ventasBean.anioSeleccionado()}" /> 
-                <h:outputLabel value="Selección: #{ventasBean.anio}" styleClass="strong"/>
-            </h:form>
-            <h:form> 
-                <h:outputLabel value="Mes: " styleClass="strong"/>
-                <h:selectOneMenu value = "#{ventasBean.mes}" required="true" requiredMessage="Selecciona "> 
-                    <f:selectItems value="#{ventasBean.meses}" />  
-                </h:selectOneMenu>  
-                <h:commandButton value = "Seleccionar Mes" action = "#{ventasBean.mesSeleccionado()}" /> 
-                <h:outputLabel value="Selección:  #{ventasBean.mes}" styleClass="strong"/>
-            </h:form>
-            <h:form>
-                <p:dataTable
-                    id="data"
-                    value="#{ventasBean.ventasDias.entrySet().toArray()}"
-                    var="file"
-                    scrollable="false"
-                    scrollHeight="100px"
-                    paginator="true"
-                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                    resizableColumns="true"
-                    rows="5">
-                    <p:column headerText="Dia" sortBy="#{file.key}">
-                        <h:outputText value="#{file.key}" />
-                    </p:column>
-                    <p:column headerText="Cantidad" sortBy="#{file.value}">
-                        <h:outputText value="#{file.value}" />
-                    </p:column>
-
-                </p:dataTable>
-            </h:form>
-        </p:fieldset>
         <p:fieldset legend="Reportes totales del Sistema">
             <h:form>
                 <p:dataTable
@@ -94,5 +53,48 @@
                 </p:dataTable>
             </h:form>
         </p:fieldset>
+        <p:fieldset legend="Reportes parciales del Sistema">
+
+            <h:form> 
+                <h:outputLabel value="Año: " styleClass="strong"/>
+                <h:selectOneMenu value = "#{ventasBean.anio}" required="true" requiredMessage="Selecciona "> 
+                    <f:selectItems value="#{ventasBean.anios}" />  
+                </h:selectOneMenu>  
+                <h:commandButton value = "Seleccionar Año" action = "#{ventasBean.anioSeleccionado()}" /> 
+                <h:outputLabel value="Selección: #{ventasBean.anio}" styleClass="strong"/>
+            </h:form>
+            <h:form> 
+                <h:outputLabel value="Mes: " styleClass="strong"/>
+                <h:selectOneMenu value = "#{ventasBean.mes}" required="true" requiredMessage="Selecciona "> 
+                    <f:selectItems value="#{ventasBean.meses}" />  
+                </h:selectOneMenu>  
+                <h:commandButton value = "Seleccionar Mes" action = "#{ventasBean.mesSeleccionado()}" /> 
+                <h:outputLabel value="Selección:  #{ventasBean.mes}" styleClass="strong"/>
+            </h:form>
+            <h:form>
+                <p:dataTable
+                    id="ventasMesData"
+                    value="#{ventasBean.ventasDias.entrySet().toArray()}"
+                    var="file"
+                    scrollable="false"
+                    scrollHeight="100px"
+                    paginator="true"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                    resizableColumns="true"
+                    rows="5">
+                    <p:column headerText="Dia" sortBy="#{file.key}">
+                        <h:outputText value="#{file.key}" />
+                    </p:column>
+                    <p:column headerText="Cantidad" sortBy="#{file.value}">
+                        <h:outputText value="#{file.value}" />
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+            <h:form>
+                <p:chart type="pie" model="#{ventasBean.grafica}" style="width:500px;height:400px" />
+            </h:form>
+        </p:fieldset>
+        
     </ui:define>
 </ui:composition>
